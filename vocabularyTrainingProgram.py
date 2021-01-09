@@ -30,8 +30,7 @@ class VocabularyTrainingProgram():
                 self.show_all_the_words()
 
 
-        # Add if-clause to test number from choice
-    
+
 
     def add_new_word(self):
         swe_word = input("Write a swedish word: ")
@@ -67,12 +66,3 @@ class VocabularyTrainingProgram():
             else:
                 print("\nWrong, the correct answer is "+ words.get_english_word())
                 fails += 1
-        
-        
-
-
-VocabularyTrainingProgram().add_new_word()
-VocabularyTrainingProgram().add_new_word()
-VocabularyTrainingProgram().add_new_word()
-VocabularyTrainingProgram().add_new_word()
-VocabularyTrainingProgram().take_the_test()
