@@ -35,14 +35,18 @@ class VocabularyTrainingProgram():
                 self.show_high_score()
 
 
-
-
     def add_new_word(self):
         swe_word = input("Write a swedish word: ").lower()
-        en_word = input("Write an english word: ").lower
+        en_word = input("Write an english word: ").lower()
 
         new_word = Word(swe_word,en_word)
         self.word_list.append(new_word)
+
+
+    def word_list_has_content(self):
+        if self.word_list == []:
+            print("You must add words to the test! Entering add-mode.")
+            self.add_new_word()
 
 
     def show_all_the_words(self):
@@ -70,8 +74,23 @@ class VocabularyTrainingProgram():
                 position = scores_index + 1
                 print("{}: {} ".format(str(position),str(score_list[scores_index])))
 
+    def language_chooser(self):
+        print("Select Swedish to English (1) or English to Swedish (2)")
+        
+        choice = input()
 
-    
+        while choice != "1" and choice != "2":
+            print("Must choose 1 or 2")
+            choice = input()
+
+        if choice == "1":
+            lang = "en"
+            return lang
+        
+        if choice == "2":
+            lang = "swe"
+            return lang
+
 
 
     def take_the_test(self):
@@ -80,30 +99,62 @@ class VocabularyTrainingProgram():
         game = True
         tmp_high_score = 0
 
-        while game == True:
+        # Tests if list has content, else adds and continues
+        self.word_list_has_content()
 
+        # Start Test
+        while game == True:
+            
+            # Fail-checker before continuation.
             for words in self.word_list:
                 if fails == MAX_FAILURES:
                     print("Game over. Practice more!")
                     return False
 
-                print("What is the English word for: "+ words.get_swedish_word())
-                en_word = input().lower
 
-                if words.verify_answer(en_word) == True:
+                # Chose language
+                lang = self.language_chooser()
+
+                guess_word = ""
+
+                if lang == "en":
+                    print("What is the English word for: '{}'".format(words.get_swedish_word()))
+                    guess_word = input("Write answer: ")
+                elif lang == "swe":
+                    print("What is the Swedish word for: '{}'".format(words.get_english_word()))
+                    guess_word = input("Write answer: ")
+
+                
+                if words.verify_en_answer(guess_word) == True:
                     print("\nCorrect!")
                     self.highscore += 1
-                else:
+                    tmp_high_score += 1
+                elif words.verify_swe_answer(guess_word) == True:
+                    print("\nCorrect!")
+                    self.highscore += 1
+                    tmp_high_score += 1
+                elif words.verify_en_answer(guess_word) == False:
                     print("\nWrong, the correct answer is "+ words.get_english_word())
                     self.highscore -= 1
+                    tmp_high_score -= 1
                     fails += 1
+                elif words.verify_swe_answer(guess_word) == False:
+                    print("\nWrong, the correct answer is "+ words.get_swedish_word())
+                    self.highscore -= 1
+                    tmp_high_score -= 1
+                    fails += 1
+
+
 
             print("Round completed. You got: "+ str(self.highscore))
             tmp_high_score += 1
-            play_again = int(input("Select 1 to play again or 0 to quit. "))
-
+            play_again = int(input("\nSelect 1 to play again or 0 to quit. "))
+            
             if play_again == 0:
+                print("Thank you for playing. Your highscore was: "+ str(self.highscore))
                 game = False
         
         self.highscore_list.append(tmp_high_score)
         return False
+
+

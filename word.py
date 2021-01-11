@@ -17,6 +17,10 @@ class Word():
     def get_swedish_word(self):
         return self.swedish_word
 
-    def verify_answer(self,answer):
+    def verify_en_answer(self,answer):
         if answer == self.english_word:
+            return True
+
+    def verify_swe_answer(self,answer):
+        if answer == self.swedish_word:
             return True
