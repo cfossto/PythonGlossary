@@ -51,16 +51,13 @@ class VocabularyTrainingProgram():
             print("You must add words to the test! Entering add-mode.")
             self.add_new_word()
 
-
     def show_all_the_words(self):
         for words in self.word_list:
             words.test()
             print()
 
-
     def shuffle_list(self):
         random.shuffle(self.word_list)
-
 
     def show_high_score(self):
         print("Your greatest scores this session:")
@@ -93,8 +90,6 @@ class VocabularyTrainingProgram():
         if choice == "2":
             lang = "swe"
             return lang
-
-
 
     def take_the_test(self):
         fails = 0
@@ -160,4 +155,12 @@ class VocabularyTrainingProgram():
         self.highscore_list.append(tmp_high_score)
         return False
 
+    def word_conjugation(self):
+        print("Do you want to add conjugations? (Write: yes or no")
+        answer = input()
+        answer.lower()
+        while answer != "yes" and answer != "no":
+            print("Do you want to add conjugations? (Write: yes or no)")
+            answer = input()
 
+        ### Add Dict-functionality to connect a word and two variables ###
