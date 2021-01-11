@@ -3,6 +3,9 @@ from word import Word
 
 class VocabularyTrainingProgram():
 
+    def __init__(self):
+        self.show_main_menu()
+
     word_list = []
     highscore = 0
     highscore_list = []

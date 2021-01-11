@@ -1,4 +1,4 @@
-from vocabularyTrainingProgram import VocabularyTrainingProgram
+from vocabularyTrainingProgram import VocabularyTrainingProgram as VT
 
 
-VocabularyTrainingProgram().show_main_menu()
+VT()
