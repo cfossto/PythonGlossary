@@ -164,3 +164,4 @@ class VocabularyTrainingProgram():
             answer = input()
 
         ### Add Dict-functionality to connect a word and two variables ###
+        ### Then add this to Add Word-function. ###
